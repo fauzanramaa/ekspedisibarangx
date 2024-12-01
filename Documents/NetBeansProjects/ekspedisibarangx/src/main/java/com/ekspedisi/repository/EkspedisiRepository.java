@@ -4,10 +4,17 @@
  */
 package com.ekspedisi.repository;
 
+import com.ekspedisi.model.ModelEkspedisi;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 /**
  *
  * @author geren
  */
-public class EkspedisiRepository {
+@Repository
+public interface EkspedisiRepository extends JpaRepository<ModelEkspedisi, Integer>{
+    
+    
     
 }
