@@ -8,6 +8,6 @@ package com.ekspedisi.model;
  *
  * @author geren
  */
-public class ModelEkspedisi {
+public class TabelModelEkspedisi {
     
 }
