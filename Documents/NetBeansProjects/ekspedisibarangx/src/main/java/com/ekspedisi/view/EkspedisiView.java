@@ -32,8 +32,8 @@ public class EkspedisiView extends javax.swing.JFrame {
     }
     
     public void loadEkspedisiTable(){
-        List<ModelEkspedisi> listMahasiswa= controller.getAllEkspedisi();
-        ModelTabelEkspedisi tableModel=new ModelTabelEkspedisi(listMahasiswa);
+        List<ModelEkspedisi> listEkspedisi= controller.getAllEkspedisi();
+        ModelTabelEkspedisi tableModel=new ModelTabelEkspedisi(listEkspedisi);
         dataTable.setModel(tableModel);
     }
 
@@ -63,8 +63,11 @@ public class EkspedisiView extends javax.swing.JFrame {
         dataTable = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         ComboAsalTujuan = new javax.swing.JComboBox<>();
+        btnUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Silaju Express Jakarta");
+        setLocation(new java.awt.Point(400, 70));
 
         jLabel1.setText("Asal");
 
@@ -127,59 +130,84 @@ public class EkspedisiView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        dataTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dataTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(dataTable);
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("SiLaju Express Jakarta");
 
         ComboAsalTujuan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jakarta To Bogor", "Jakarta To Depok", "Jakarta To Tangerang", "Jakarta To Bekasi" }));
+        ComboAsalTujuan.setMinimumSize(new java.awt.Dimension(84, 22));
+        ComboAsalTujuan.setPreferredSize(new java.awt.Dimension(84, 22));
+        ComboAsalTujuan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboAsalTujuanActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setText("Perbarui");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(BtnSimpan))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ComboPembayaran, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnBuang)
-                                        .addGap(50, 50, 50)
-                                        .addComponent(btnSegarkan)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(beratField)
-                                    .addComponent(ComboPengiriman, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(62, 62, 62)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(77, 77, 77))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(95, 95, 95)
-                                        .addComponent(ComboAsalTujuan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3))
-                        .addGap(144, 144, 144))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(62, 62, 62)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(107, 107, 107)
+                                    .addComponent(ComboAsalTujuan, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel3)))
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel4))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(beratField)
+                                        .addComponent(ComboPengiriman, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel7)
+                                        .addComponent(BtnSimpan))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(btnUpdate)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnSegarkan))
+                                        .addComponent(ComboPembayaran, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel5))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(45, 45, 45)
+                                    .addComponent(btnBuang)))
+                            .addGap(83, 83, 83)))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(51, 51, 51)
@@ -189,7 +217,7 @@ public class EkspedisiView extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -211,9 +239,12 @@ public class EkspedisiView extends javax.swing.JFrame {
                     .addComponent(ComboPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnSimpan)
-                    .addComponent(btnBuang)
-                    .addComponent(btnSegarkan))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BtnSimpan)
+                        .addComponent(btnUpdate))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSegarkan)
+                        .addComponent(btnBuang)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -331,6 +362,115 @@ public class EkspedisiView extends javax.swing.JFrame {
         loadEkspedisiTable();
     }//GEN-LAST:event_btnSegarkanActionPerformed
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+          List<ModelEkspedisi> listEkspedisi = controller.getAllEkspedisi();
+    ModelTabelEkspedisi tableModel = (ModelTabelEkspedisi) dataTable.getModel();
+
+    // Memeriksa apakah ada baris yang dipilih
+    if (dataTable.getSelectedRowCount() == 1) {
+        int selectedRow = dataTable.getSelectedRow();
+        
+        // Mendapatkan nilai dari input
+        String AsalTujuan = ComboAsalTujuan.getSelectedItem().toString();
+        float berat = Float.parseFloat(beratField.getText());
+        String Pengiriman = ComboPengiriman.getSelectedItem().toString();
+        String Pembayaran = ComboPembayaran.getSelectedItem().toString();
+        
+        // Hitung ulang biaya berdasarkan data baru
+        int biayaAsalTujuan = 0;
+        switch (AsalTujuan) {
+            case "Jakarta To Bogor":
+                biayaAsalTujuan = 6000;
+                break;
+            case "Jakarta To Depok":
+                biayaAsalTujuan = 3000;
+                break;
+            case "Jakarta To Tangerang":
+                biayaAsalTujuan = 3500;
+                break;
+            case "Jakarta To Bekasi":
+                biayaAsalTujuan = 2000;
+                break;
+            default:
+                biayaAsalTujuan = 0;
+        }
+
+        int biayaPengiriman = 0;
+        switch (Pengiriman) {
+            case "SameDay":
+                biayaPengiriman = 10000;
+                break;
+            case "NextDay":
+                biayaPengiriman = 8000;
+                break;
+            case "Standard":
+                biayaPengiriman = 5000;
+                break;
+            default:
+                biayaPengiriman = 0;
+        }
+
+        // Hitung ulang harga
+        int harga = (int) ((biayaAsalTujuan * berat) + biayaPengiriman);
+
+        // Memperbarui data pada list
+        ModelEkspedisi updatedEkspedisi = listEkspedisi.get(selectedRow);
+        updatedEkspedisi.setAsaldantujuan(AsalTujuan);
+        updatedEkspedisi.setBerat(berat);
+        updatedEkspedisi.setPengiriman(Pengiriman);
+        updatedEkspedisi.setPembayaran(Pembayaran);
+        updatedEkspedisi.setHarga(harga); // Memperbarui harga
+
+        // Memperbarui data pada model tabel
+        tableModel.setValueAt(AsalTujuan, selectedRow, 0);
+        tableModel.setValueAt(berat, selectedRow, 1);
+        tableModel.setValueAt(Pengiriman, selectedRow, 2);
+        tableModel.setValueAt(Pembayaran, selectedRow, 3);
+        tableModel.setValueAt(harga, selectedRow, 4); // Tambahkan harga ke kolom tabel
+
+        // Memanggil fungsi untuk menyimpan perubahan (opsional)
+        controller.updateEkspedisi(updatedEkspedisi);
+
+        JOptionPane.showMessageDialog(this, "Berhasil Perbarui..");
+    } else {
+        if (dataTable.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Tabel Kosong..");
+        } else {
+            JOptionPane.showMessageDialog(this, "Silahkan Pilih Salah Satu Baris");
+        }
+    }
+        
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void dataTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dataTableMouseClicked
+        // TODO add your handling code here:
+       int selectedRow = dataTable.getSelectedRow();
+    
+    if (selectedRow != -1) {
+        // Ambil model tabel yang digunakan untuk dataTable
+        ModelTabelEkspedisi tableModel = (ModelTabelEkspedisi) dataTable.getModel();
+
+        // Ambil nilai dari sel yang dipilih sesuai dengan kolom
+        String tblid = tableModel.getValueAt(selectedRow, 0).toString();
+        String tblasaldantujuan = tableModel.getValueAt(selectedRow, 1).toString();
+        String tblberat = tableModel.getValueAt(selectedRow, 2).toString();
+        String tblharga = tableModel.getValueAt(selectedRow, 3).toString();
+        String tblpembayaran = tableModel.getValueAt(selectedRow, 4).toString();
+        String tblpengiriman = tableModel.getValueAt(selectedRow, 5).toString();
+
+        // Isi data ke komponen form
+        ComboAsalTujuan.setSelectedItem(tblasaldantujuan);
+        beratField.setText(tblberat);
+        ComboPengiriman.setSelectedItem(tblpengiriman);
+        ComboPembayaran.setSelectedItem(tblpembayaran);
+        }
+    }//GEN-LAST:event_dataTableMouseClicked
+
+    private void ComboAsalTujuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboAsalTujuanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboAsalTujuanActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -374,6 +514,7 @@ public class EkspedisiView extends javax.swing.JFrame {
     private javax.swing.JTextField beratField;
     private javax.swing.JButton btnBuang;
     private javax.swing.JButton btnSegarkan;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JTable dataTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
