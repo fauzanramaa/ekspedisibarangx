@@ -10,9 +10,9 @@ import com.ekspedisi.model.ModelEkspedisi;
 import com.ekspedisi.service.EkspedisiService;
 
 import java.util.List;
+import org.springframework.stereotype.Controller;
 
-@RestController
-@RequestMapping("/api/ekspedisi")
+@Controller
 public class EkspedisiController {
 
     @Autowired
@@ -46,4 +46,6 @@ public class EkspedisiController {
         return ekspedisiService.getAllEkspedisi();
     }
 }
+
+
 

@@ -4,6 +4,13 @@
  */
 package com.ekspedisi.view;
 
+import java.util.List;
+import com.ekspedisi.controller.EkspedisiController;
+import com.ekspedisi.model.ModelEkspedisi;
+import com.ekspedisi.model.;
+import java.util.List;
+import javax.swing.*;
+
 /**
  *
  * @author Fauzanramaa
@@ -13,8 +20,20 @@ public class EkspedisiView extends javax.swing.JFrame {
     /**
      * Creates new form EkspedisiView
      */
-    public EkspedisiView() {
+    public MahasiswaView(MahasiswaController controller){
+        this.controller=controller;
         initComponents();
+        loadMahasiswaTable();
+    }
+    
+    public MahasiswaView() {
+        throw new UnsupportedOperationException("Not Supported yet.");
+    }
+    
+    public void loadMahasiswaTable(){
+        List<ModelMahasiswa> listMahasiswa= controller.getAllMahasiswa();
+        ModelTabelMahasiswa tableModel=new ModelTabelMahasiswa(listMahasiswa);
+        dataTable.setModel(tableModel);
     }
 
     /**
