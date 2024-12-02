@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class ModelTabelEkspedisi extends AbstractTableModel {
     private List<ModelEkspedisi> ekspedisiList;
-    private String[] columnNames = {"ID", "NPM", "Nama", "Semester", "IPK"};
+    private String[] columnNames = {"ID", "Asal dan Tujuan", "Berat", "Pengiriman", "Pembayaran", "Harga"};
 
     public ModelTabelEkspedisi(List<ModelEkspedisi> ekspedisiList) {
         this.ekspedisiList = ekspedisiList;
@@ -41,9 +41,11 @@ public class ModelTabelEkspedisi extends AbstractTableModel {
             case 2:
                 return ekspedisi.getBerat();
             case 3:
-                return ekspedisi.getSemester();
+                return ekspedisi.getPengiriman();
             case 4:
-                return ekspedisi.getIpk();
+                return ekspedisi.getPembayaran();
+            case 5:
+                return ekspedisi.getHarga();
             default:
                 return null;
         }
@@ -60,8 +62,8 @@ public class ModelTabelEkspedisi extends AbstractTableModel {
     }
 
     // Method untuk menambahkan atau memodifikasi data, jika dibutuhkan
-    public void setMahasiswaList(List<ModelMahasiswa> mahasiswaList) {
-        this.mahasiswaList = mahasiswaList;
+    public void setMahasiswaList(List<ModelEkspedisi> ekspedisiList) {
+        this.ekspedisiList = ekspedisiList;
         fireTableDataChanged(); // Memberitahu JTable bahwa data telah berubah
     }
 }

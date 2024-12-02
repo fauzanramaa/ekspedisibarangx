@@ -16,12 +16,9 @@ public class ModelEkspedisi {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-
-    @Transient
-    private AsalTujuan asaldantujuan; // Representasi asal, tujuan, dan jarak
-
+    
     @Column(name = "asaldantujuan", nullable = false, length = 50)
-    private String asaldantujuanStr; // String untuk penyimpanan di database
+    private String asaldantujuan; // String untuk penyimpanan di database
 
     @Column(name = "berat", nullable = false)
     private float berat;
@@ -35,7 +32,6 @@ public class ModelEkspedisi {
     @Column(name = "harga")
     private int harga;
 
-    // Getter dan Setter
     public int getId() {
         return id;
     }
@@ -44,21 +40,12 @@ public class ModelEkspedisi {
         this.id = id;
     }
 
-    public AsalTujuan getAsaldantujuan() {
+    public String getAsaldantujuan() {
         return asaldantujuan;
     }
 
-    public void setAsaldantujuan(AsalTujuan asaldantujuan) {
-        this.asaldantujuan = asaldantujuan;
-        this.asaldantujuanStr = asaldantujuan.toString(); // Simpan string representasi untuk database
-    }
-
-    public String getAsaldantujuanStr() {
-        return asaldantujuanStr;
-    }
-
-    public void setAsaldantujuanStr(String asaldantujuanStr) {
-        this.asaldantujuanStr = asaldantujuanStr;
+    public void setAsaldantujuan(String asaldantujuanStr) {
+        this.asaldantujuan = asaldantujuanStr;
     }
 
     public float getBerat() {
@@ -92,16 +79,6 @@ public class ModelEkspedisi {
     public void setHarga(int harga) {
         this.harga = harga;
     }
-
-    // Kalkulasi harga berdasarkan jarak, berat, dan metode pengiriman
-    public void calculateHarga() {
-        int hargaPerKm = switch (pengiriman) {
-            case "Fast Track" -> 10000;
-            case "Mass Track" -> 8000;
-            case "Motor Track" -> 5000;
-            default -> 0;
-        };
-        this.harga = (int) (asaldantujuan.getJarak() * berat * hargaPerKm);
-    }
+    
 }
 

@@ -7,7 +7,7 @@ package com.ekspedisi.view;
 import java.util.List;
 import com.ekspedisi.controller.EkspedisiController;
 import com.ekspedisi.model.ModelEkspedisi;
-import com.ekspedisi.model.;
+import com.ekspedisi.model.ModelTabelEkspedisi;
 import java.util.List;
 import javax.swing.*;
 
@@ -16,23 +16,24 @@ import javax.swing.*;
  * @author Fauzanramaa
  */
 public class EkspedisiView extends javax.swing.JFrame {
+    private EkspedisiController controller;
 
     /**
      * Creates new form EkspedisiView
      */
-    public MahasiswaView(MahasiswaController controller){
+    public EkspedisiView(EkspedisiController controller){
         this.controller=controller;
         initComponents();
-        loadMahasiswaTable();
+        loadEkspedisiTable();
     }
     
-    public MahasiswaView() {
+    public EkspedisiView() {
         throw new UnsupportedOperationException("Not Supported yet.");
     }
     
-    public void loadMahasiswaTable(){
-        List<ModelMahasiswa> listMahasiswa= controller.getAllMahasiswa();
-        ModelTabelMahasiswa tableModel=new ModelTabelMahasiswa(listMahasiswa);
+    public void loadEkspedisiTable(){
+        List<ModelEkspedisi> listMahasiswa= controller.getAllEkspedisi();
+        ModelTabelEkspedisi tableModel=new ModelTabelEkspedisi(listMahasiswa);
         dataTable.setModel(tableModel);
     }
 
@@ -49,19 +50,19 @@ public class EkspedisiView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        beratField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        ComboPengiriman = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        ComboPembayaran = new javax.swing.JComboBox<>();
+        BtnSimpan = new javax.swing.JButton();
+        btnBuang = new javax.swing.JButton();
+        btnSegarkan = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        dataTable = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        ComboAsalTujuan = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,9 +74,9 @@ public class EkspedisiView extends javax.swing.JFrame {
 
         jLabel4.setText("Berat");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        beratField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                beratFieldActionPerformed(evt);
             }
         });
 
@@ -83,24 +84,39 @@ public class EkspedisiView extends javax.swing.JFrame {
 
         jLabel6.setText("Metode Pengiriman");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fast Track", "Mass Track", "Motor Track" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        ComboPengiriman.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SameDay", "NextDay", "Standard" }));
+        ComboPengiriman.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                ComboPengirimanActionPerformed(evt);
             }
         });
 
         jLabel7.setText("Metode Pembayaran");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tunai", "DFOD" }));
+        ComboPembayaran.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tunai", "DFOD" }));
 
-        jButton1.setText("Simpan");
+        BtnSimpan.setText("Simpan");
+        BtnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSimpanActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Buang");
+        btnBuang.setText("Buang");
+        btnBuang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuangActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Segarkan");
+        btnSegarkan.setText("Segarkan");
+        btnSegarkan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSegarkanActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        dataTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -111,11 +127,11 @@ public class EkspedisiView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(dataTable);
 
-        jLabel8.setText("SiLaju Express Jabodetabek");
+        jLabel8.setText("SiLaju Express Jakarta");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jakarta To Bogor", "Jakarta To Depok", "Jakarta To Tangerang", "Jakarta To Bekasi" }));
+        ComboAsalTujuan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jakarta To Bogor", "Jakarta To Depok", "Jakarta To Tangerang", "Jakarta To Bekasi" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,14 +148,14 @@ public class EkspedisiView extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
-                                    .addComponent(jButton1))
+                                    .addComponent(BtnSimpan))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ComboPembayaran, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton2)
+                                        .addComponent(btnBuang)
                                         .addGap(50, 50, 50)
-                                        .addComponent(jButton3)
+                                        .addComponent(btnSegarkan)
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,8 +163,8 @@ public class EkspedisiView extends javax.swing.JFrame {
                                     .addComponent(jLabel4))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(beratField)
+                                    .addComponent(ComboPengiriman, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -158,7 +174,7 @@ public class EkspedisiView extends javax.swing.JFrame {
                                         .addGap(77, 77, 77))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(95, 95, 95)
-                                        .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                        .addComponent(ComboAsalTujuan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -179,25 +195,25 @@ public class EkspedisiView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboAsalTujuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(beratField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboPengiriman, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(BtnSimpan)
+                    .addComponent(btnBuang)
+                    .addComponent(btnSegarkan))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -211,13 +227,109 @@ public class EkspedisiView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void ComboPengirimanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPengirimanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_ComboPengirimanActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void beratFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beratFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_beratFieldActionPerformed
+
+    private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        String asaltujuan = ComboAsalTujuan.getSelectedItem().toString();
+        int biayaAsalTujuan = 0;
+
+        switch (asaltujuan) {
+            case "Jakarta To Bogor":
+                biayaAsalTujuan = 6000;
+                break;
+            case "Jakarta To Depok":
+                biayaAsalTujuan = 3000;
+                break;
+            case "Jakarta To Tangerang":
+                biayaAsalTujuan = 3500;
+                break;
+            case "Jakarta To Bekasi":
+                biayaAsalTujuan = 2000;
+                break;
+            default:
+                biayaAsalTujuan = 0;
+        }
+
+        // Ambil nilai berat dari TextField beratField
+        float berat = Float.parseFloat(beratField.getText());
+
+        // Ambil nilai dari ComboBox Pengiriman
+        String pengiriman = ComboPengiriman.getSelectedItem().toString();
+        int biayaPengiriman = 0;
+
+        switch (pengiriman) {
+            case "SameDay":
+                biayaPengiriman = 10000;
+                break;
+            case "NextDay":
+                biayaPengiriman = 8000;
+                break;
+            case "Standard":
+                biayaPengiriman = 5000;
+                break;
+            default:
+                biayaPengiriman = 0;
+        }
+
+        // Ambil nilai pembayaran dari ComboBox Pembayaran
+        String pembayaran = ComboPembayaran.getSelectedItem().toString();
+
+        // Hitung harga berdasarkan rumus
+        int harga = (int) ((biayaAsalTujuan * berat) + biayaPengiriman);
+
+        // Buat objek ModelEkspedisi
+        ModelEkspedisi ekspedisi = new ModelEkspedisi();
+        ekspedisi.setAsaldantujuan(asaltujuan);
+        ekspedisi.setBerat(berat);
+        ekspedisi.setPengiriman(pengiriman);
+        ekspedisi.setPembayaran(pembayaran);
+        ekspedisi.setHarga(harga);
+
+        // Simpan data menggunakan controller
+        controller.addEkspedisi(ekspedisi);
+
+        // Muat ulang data di tabel
+        loadEkspedisiTable();
+        
+    }//GEN-LAST:event_BtnSimpanActionPerformed
+
+    private void btnBuangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuangActionPerformed
+        // TODO add your handling code here:
+            JTextField idField = new JTextField(5);
+
+        // Membuat panel untuk menampung JTextField
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Masukkan ID yang ingin dihapus:"));
+        panel.add(idField);
+
+        // Menampilkan dialog box dengan JTextField, tombol OK, dan Cancel
+        int result = JOptionPane.showConfirmDialog(null, panel, 
+            "Hapus Data Customer", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        // Jika tombol OK ditekan
+        if (result == JOptionPane.OK_OPTION) {
+            try {
+                // Mengambil input ID dan memanggil metode deleteMhs
+                int id = Integer.parseInt(idField.getText());
+                controller.deleteEkspedisi(id);
+                JOptionPane.showMessageDialog(null, "Data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+            } catch (NumberFormatException e) {
+                // Menangani error jika ID yang dimasukkan bukan angka
+                JOptionPane.showMessageDialog(null, "ID harus berupa angka.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }
+    }//GEN-LAST:event_btnBuangActionPerformed
+
+    private void btnSegarkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSegarkanActionPerformed
+        // TODO add your handling code here:
+        loadEkspedisiTable();
+    }//GEN-LAST:event_btnSegarkanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,12 +367,14 @@ public class EkspedisiView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JButton BtnSimpan;
+    private javax.swing.JComboBox<String> ComboAsalTujuan;
+    private javax.swing.JComboBox<String> ComboPembayaran;
+    private javax.swing.JComboBox<String> ComboPengiriman;
+    private javax.swing.JTextField beratField;
+    private javax.swing.JButton btnBuang;
+    private javax.swing.JButton btnSegarkan;
+    private javax.swing.JTable dataTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -270,7 +384,5 @@ public class EkspedisiView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
